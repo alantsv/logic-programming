@@ -1,5 +1,5 @@
 %Ex 17
-	trocaPU(PMsU,UMsP):- PMsU=[P|MsU], append(Ms,[U],MsU), append(Ms,[P], MsP), [U|MsP]= UMsP.
+	trocaPU(PMsU,UMsP) :- PMsU = [P|MsU], append(Ms,[U],MsU), append(Ms,[P], MsP), [U|MsP]= UMsP.
 
 %?- trocaPU([a,b,c,d], X)
 %?- X[d,b,c,a]
