@@ -23,3 +23,14 @@
 
 %?- select(a,[b,a,c]. X). X=[b,c]
 %?remDupl1([a,b,a],X). X=[b,a]
+
+%Ex 20
+	%remove(X,L,R):- se esta na cabeça remove
+	%remove(X,L,R):- se não devolve como cabeça de R
+	%remove(X,L,R):- L=[], R[].
+	
+%?- remove(a[a,b,a,c,d,a,x], X). X=[b,c,d,x]
+
+%a) se X está na cabeça de L remove o X da cauda L
+%b) senão devolve X na cabeça do R, remove X da cauda L
+
