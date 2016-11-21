@@ -1,7 +1,7 @@
 %Ex 17
 	trocaPU(PMsU,UMsP) :- PMsU = [P|MsU], append(Ms,[U],MsU), append(Ms,[P], MsP), [U|MsP]= UMsP.
 
-%?- trocaPU([a,b,c,d], X)
+%?- trocaPU([a,b,c,d], X).
 %?- X[d,b,c,a]
 
 %Ex 17.2
@@ -13,13 +13,13 @@
 	remDupl([X|Xs],[X|Xs]) :- \x member(X,Xs), remDupl(Xs,Xr).
 
 %?- remDupl([a,b,a,b],X).
-%?- X =[a,b
+%?- X =[a,b].
 
 %Ex 19
 	remDupl1([X],[X]):-!.
 	remDupl1([],[]):-!.
-	remDupl1([X|Xs], Xo) :- select(X,Xs,Xr), remDupl1(Xr,Xo).
+	remDupl1([X|Xs], Xo) :- select(X,Xs,Xr), remDupl1([X|Xr],Xo).
 	remDupl1([X|Xs], [X|Xo]):- \+ select(X,Xs,Xp), remDupl1(Xs,Xo).
 
-%?- select(a,[b,a,c], X). X=[b,c]
-%?remDupl1([a,b,a],X). X=[a,b]
+%?- select(a,[b,a,c]. X). X=[b,c]
+%?remDupl1([a,b,a],X). X=[b,a]
