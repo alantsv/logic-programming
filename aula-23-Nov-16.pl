@@ -52,3 +52,5 @@
 
 % ?- palindrome(a[a,b,c]). False
 % ?- palindrome([a,b,b,a]). True
+
+
