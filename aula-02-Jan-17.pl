@@ -35,3 +35,10 @@ metIguais2(XY):- length(XY,L), M is L/2,
 		reverse(XY,YX),
 		primeiros(YX,M,Yr),
 		reverse(Yr, Y), Y = X.
+
+%34(b) - Minimo de uma lista usando acumulador
+
+	minL(L,M):- L=[X|Xs], minL(L,X,M).
+	minL(L,Acc,M):- L=[], M=Acc,!.
+	minL(L,Acc,M):- L=[X|Xs], Acc > X, minL(Xs,X,M).
+	minL(L,Acc,M):- L=[X|Xs], Acc =< X, minL(Xs,Acc,M).
