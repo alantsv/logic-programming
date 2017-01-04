@@ -13,7 +13,7 @@
 	permutacao([],[]).
 
 %?- select(5,[1,3,5,7], X). X=[1,3,7]
-%?- permutacao([1,7,5,3],X). X = [1,3,5,7]
+%?- permutacao([1,7,5,3],X). X = [1,3,5,7];... X=[1,7,3,5] ... ... X=[1,3,5,7]...
 
 	sotx(L,S):- permutacao(L,S), isOrdered(S).
 
