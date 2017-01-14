@@ -60,7 +60,7 @@
 
 %?- merge1([a,b,b,k,z],[c,m,n,o],X). X=[a,b,b,c,k,m,n,o,z]
 
-%41- ERRO!
+%41- ERRO! (Não aceita lista com valores repitidos)
 
 	mergeSort([],[]):-!.
 	mergeSort([X],[X]):-!.
@@ -68,4 +68,5 @@
 			mergeSort(X,Xo),mergeSort(Y,Yo),
 			merge1(Xo,Yo,S).
 
-%?- mergeSort([1,7,1,7,3,66,2,1,0], S).
+%?- mergeSort([1,7,1,7,3,66,2,1,0], S). (Lista com valores repitidos)
+%?- mergeSort([1,11,5,2], L).  L = [1, 2, 5, 11]
