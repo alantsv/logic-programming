@@ -5,6 +5,8 @@ pega3(E,L):- L=[B|A], A=[Y|Ys], Ys=[Z|D], Z=E.
 
 pegaTres(E,[_,_,E|_]).
 
+getTree([X,Y,Z|_],[X,Y,Z]).
+
 % (Pág 9) Ex 2 - Com base no programa compr/2 faça um predicado sum/2 que
 % some uma lista de valores?
 
@@ -132,8 +134,12 @@ remDupl([X|Xs],[X|L]):-remDupl(Xs, L).
 % uma lista, use apenas o member e o select/3. Remova as cópias finais dos
 % elementos da lista. ?- remDupl1([a,b,a],X). X=[a,b].
 
-remDupl1([X|Xs],[X|L]):-select1(X,Xs,L).
-remDupl1([X|Xs],[X|L]):-remDupl1(Xs,L).
+remDupl1([],[],R).
+remDupl1([X|Xs],R):-membro(X|Xs),select(X,Xs,Ys),remDupl1(X,Ys,R).
+remDupl1([X|Ys],R):- \+membro(X|Ys),remDupl1(X,Ys,R).
+
+%remDupl1([X|Xs],[X|L]):-select1(X,Xs,L).
+%remDupl1([X|Xs],[X|L]):-remDupl1(Xs,L).
 
 % Ex 20 - Faça um predicado remove/3 tal que: ?-remove(a,[a,b,a,d,x,a],X).
 % X=[b,d,x]
@@ -169,7 +175,7 @@ reverse1([L|Ls],Acc, R):-reverse1(Ls,[L|Acc],R).
 
 % ?- reverse([a,b,c],R). R=[c,b,a]
 
-% Ex 25 - Defina o predicadp rever sem acumulador, usando append/3. Codifique as regras:
+% Ex 25 - Defina o predicado reverse sem acumulador, usando append/3. Codifique as regras:
 
 % (base) o reverso de uma lista vazia é a lista vazia;
 % (recursiva) o reverso de uma lista é o reverso da cauda concatenado com a cabeça.
