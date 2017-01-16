@@ -15,7 +15,7 @@
 %Ex 21
 	flatten1([],[]).
 	flatten1(X,[X]):-X\=[], X\=[_|_].
-	flattne1([X|Xs],F):-flatten1(X,F1),flatten(Xs,F2).
+	flattne1([X|Xs],F):-flatten1(X,F1),flatten(Xs,F2), append(F1,F2,F).
 % ?- flatten1([1,[2],[],[2[3,4],5],6],X).
 
 %Ex 22
