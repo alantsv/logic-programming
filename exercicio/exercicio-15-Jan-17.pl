@@ -35,9 +35,11 @@ membro1(X,L):-append(_,[X|_],L).
 
 % Ex 6 - Faça o precidado sublist/2
 
-prefix(P,L):-append(P,_,L).
+prefixo(P,L):-append(P,_,L).
 suffix(S,L):-append(_,S,L).
-sublist(S,L):-prefix(P,L), suffix(S,P).
+sublist(S,L):-prefixo(P,L), suffix(S,P).
+
+% ?- sublist(L,[a,b]), L\=[].
 
 % Select
 
@@ -88,7 +90,7 @@ remU3([U|Lc],[U|Lu]):-remU3(Lc,Lu).
 
 % Ex 13 - Defina o predicado remU/2 usando append sem recursividade.
 
-remUa(L,Lu):-append(Lu,[U],L).
+remU4(L,Lu):-append(Lu,[U],L).
 
 % Ex 14 - Defina um predicado contiguos/1 que testa se uma lista tem dois
 % elementos contíguis iguais, faça uam versão recursiva. 
@@ -100,12 +102,17 @@ contiguos([L|Lc]):-contiguos(Lc).
 % Ex 15 - Defina um predicado contiguos/1 que testa se uma lista tem dois
 % elementos contíguos iguais, usando append.
 
+contiguos1(L):-append(_,[Y,Y|_],L).
 
 % Ex 16 - Defina um preficado dupl/1, que é verdadeiro, se a lista tem elementos
 % duplicados. Use o member e recursividade.
 
 dupl([X|Xs]):- membro1(X,Xs),!.
 dupl([X|Xs]):- dupl(Xs).
+
+% Ex 17 -
+
+trocaPU([X|Xs], L):- append(Xs,[X],R1), append(_,[U],Xs), append([U],R1,L).
 
 % Teste de diferenciação de cláudulas
 
@@ -143,3 +150,36 @@ remove(X,[Y|Xs],[Y|L]):-remove(X,Xs,L),!.
 flatten1([],[]).
 flatten1(X,[X]):- X\=[], X\=[_|_].
 flatten1([X|Xs],F):-flatten1(X,F1), flatten(Xs,F2), append(F1,F2,F).
+
+% Ex 23 - Permutação
+
+% (base) se a lista é [], então retorna-se [];
+% (recuriva) senão, dada uma lista, extrai-se um de seus elementos usando select/3,
+% coloca-se como primeiro elemento da solução e chama-se recursivamente o predicado
+% permutação para a lista sem o elemento.
+
+permutation([],[]).
+permutation(Xs, [Z|Zs]):-select(Z,Xs,Ys),permutation(Ys,Xs).
+
+% Ex 24 - Defina o predicado reverse com acumulador
+
+reverse1(L,R):- reverse1(L,[],R).
+reverse1([],R,R).
+reverse1([L|Ls],Acc, R):-reverse1(Ls,[L|Acc],R).
+
+% ?- reverse([a,b,c],R). R=[c,b,a]
+
+% Ex 25 - Defina o predicadp rever sem acumulador, usando append/3. Codifique as regras:
+
+% (base) o reverso de uma lista vazia é a lista vazia;
+% (recursiva) o reverso de uma lista é o reverso da cauda concatenado com a cabeça.
+
+reverso([],[]).
+reverso([X|Xs],R):- reverso(Xs,R1), append(R1,[X], R).
+
+% Ex 26 - Defina o predicado palindrome/1, que é verdadeiro se a lista é um palíndrome,
+% por exemplo, [a,b,c,d,c,d,a]. Faça uma versão recrusiva sem usar reverse.
+
+palindrome([X|Xs]):-append(Xm,[X],Xs), palindrome(Xm),!.
+palindrome([]):-!.
+palindrome([X]):-!.
